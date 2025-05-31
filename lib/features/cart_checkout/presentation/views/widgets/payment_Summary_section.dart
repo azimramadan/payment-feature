@@ -14,7 +14,7 @@ class PaymentSummarySection extends StatelessWidget {
         OrderSummaryRow(
           orderSummaryItem: OrderSummaryItem(
             label: 'Order Subtotal',
-            value: '\$&${orderSummaryModel.orderSubtotal.toStringAsFixed(2)}',
+            value: '\$${orderSummaryModel.subtotal.toStringAsFixed(2)}',
           ),
         ),
         const SizedBox(height: 3),

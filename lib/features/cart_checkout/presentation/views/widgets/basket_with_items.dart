@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_feature/features/cart_checkout/data/models/cart_item_model.dart';
+import 'package:payment_feature/features/cart_checkout/presentation/view_models/cubit/product_cubit_cubit.dart';
 import 'package:payment_feature/features/cart_checkout/presentation/views/widgets/basket_item.dart';
 import 'package:payment_feature/features/cart_checkout/presentation/views/widgets/basket_widget.dart';
 import 'package:payment_feature/features/cart_checkout/presentation/views/widgets/product_tooltip.dart';
@@ -120,11 +122,17 @@ class _BasketWithItemsState extends State<BasketWithItems> {
         onQuantityChanged: (newQuantity, newAvailableQuantity) {
           setState(() {
             widget.cartItems[index].quantity = newQuantity;
+            BlocProvider.of<ProductCubitCubit>(
+              context,
+            ).updateQuantity(cartItem.product, newQuantity);
             widget.cartItems[index].product.availableQuantity =
                 newAvailableQuantity;
           });
         },
         onRemove: () {
+          BlocProvider.of<ProductCubitCubit>(
+            context,
+          ).removeFromCart(cartItem.product);
           _removeProduct(index);
         },
       ),

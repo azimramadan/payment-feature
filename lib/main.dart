@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:payment_feature/core/constants/app_assets.dart';
-import 'package:payment_feature/features/cart_checkout/presentation/views/cart_view.dart';
-// import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:payment_feature/features/cart_checkout/presentation/view_models/cubit/product_cubit_cubit.dart';
+import 'package:payment_feature/features/cart_checkout/presentation/views/product_card_grid_view.dart';
 
 void main() {
   runApp(const CartCheckout());
@@ -12,6 +12,12 @@ class CartCheckout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: const CartView());
+    return BlocProvider(
+      create: (context) => ProductCubitCubit(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: const ProductCardGridView(),
+      ),
+    );
   }
 }

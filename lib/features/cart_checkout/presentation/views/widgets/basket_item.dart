@@ -23,7 +23,7 @@ class BasketItem extends StatelessWidget {
             : null,
         boxShadow: [
           BoxShadow(
-            color: isSeclected ? AppColors.darkGray : AppColors.royalBlue,
+            color: isSeclected ? AppColors.darkGray : Colors.transparent,
             blurRadius: isSeclected ? 8 : 4,
             offset: Offset(0, 2),
           ),

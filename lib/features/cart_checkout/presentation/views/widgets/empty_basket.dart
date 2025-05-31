@@ -6,14 +6,6 @@ class EmptyBasket extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(AppAssets.imagesBasket),
-          fit: BoxFit.fill,
-        ),
-      ),
-      child: SizedBox(),
-    );
+    return Image.asset((AppAssets.imagesBasket));
   }
 }

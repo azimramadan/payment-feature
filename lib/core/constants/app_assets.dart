@@ -6,13 +6,13 @@ class AppAssets {
   /// assets/images/basket.png
   static const String imagesBasket = "assets/images/basket.png";
 
-  /// Assets for imagesImagePhotoroom
-  /// assets/images/image-Photoroom.png
-  static const String imagesImagePhotoroom = "assets/images/image-Photoroom.png";
-
   /// Assets for imagesProduct1
   /// assets/images/product_1.png
   static const String imagesProduct1 = "assets/images/product_1.png";
+
+  /// Assets for imagesProduct10
+  /// assets/images/product_10.png
+  static const String imagesProduct10 = "assets/images/product_10.png";
 
   /// Assets for imagesProduct2
   /// assets/images/product_2.png
