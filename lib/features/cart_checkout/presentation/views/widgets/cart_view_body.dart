@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:payment_feature/core/constants/app_assets.dart';
 import 'package:payment_feature/features/cart_checkout/data/models/cart_item_model.dart';
-import 'package:payment_feature/features/cart_checkout/data/models/product_model.dart';
 import 'package:payment_feature/features/cart_checkout/presentation/view_models/cubit/product_cubit_cubit.dart';
 import 'package:payment_feature/features/cart_checkout/presentation/views/widgets/basket_area.dart';
 import 'package:payment_feature/features/cart_checkout/presentation/views/widgets/payment_Summary_section.dart';
