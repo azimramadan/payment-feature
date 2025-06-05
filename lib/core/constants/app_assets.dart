@@ -2,9 +2,21 @@
 class AppAssets {
   AppAssets._();
   
+  /// Assets for imagesBackgroundImage
+  /// assets/images/backgroundImage.png
+  static const String imagesBackgroundImage = "assets/images/backgroundImage.png";
+
   /// Assets for imagesBasket
   /// assets/images/basket.png
   static const String imagesBasket = "assets/images/basket.png";
+
+  /// Assets for imagesCredit
+  /// assets/images/credit.png
+  static const String imagesCredit = "assets/images/credit.png";
+
+  /// Assets for imagesPaypal
+  /// assets/images/paypal.png
+  static const String imagesPaypal = "assets/images/paypal.png";
 
   /// Assets for imagesProduct1
   /// assets/images/product_1.png
@@ -45,5 +57,9 @@ class AppAssets {
   /// Assets for imagesProduct9
   /// assets/images/product_9.png
   static const String imagesProduct9 = "assets/images/product_9.png";
+
+  /// Assets for imagesTransactionBackground
+  /// assets/images/transaction_background.png
+  static const String imagesTransactionBackground = "assets/images/transaction_background.png";
 }
 
