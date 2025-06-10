@@ -1,10 +1,11 @@
 // ignore_for_file: prefer_single_quotes
 class AppAssets {
   AppAssets._();
-  
+
   /// Assets for imagesBackgroundImage
   /// assets/images/backgroundImage.png
-  static const String imagesBackgroundImage = "assets/images/backgroundImage.png";
+  static const String imagesBackgroundImage =
+      "assets/images/backgroundImage.png";
 
   /// Assets for imagesBasket
   /// assets/images/basket.png
@@ -60,6 +61,6 @@ class AppAssets {
 
   /// Assets for imagesTransactionBackground
   /// assets/images/transaction_background.png
-  static const String imagesTransactionBackground = "assets/images/transaction_background.png";
+  static const String imagesTransactionBackground =
+      "assets/images/transaction_background.png";
 }
-

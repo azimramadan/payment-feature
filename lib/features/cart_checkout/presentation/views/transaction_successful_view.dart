@@ -10,7 +10,15 @@ class TransactionSuccessfulView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.close, color: AppColors.black),
+          onPressed: () =>
+              Navigator.of(context).popUntil((route) => route.isFirst),
+        ),
+      ),
       body: Transform.translate(
         offset: Offset(0, -40),
         child: Container(
