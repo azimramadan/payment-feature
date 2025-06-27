@@ -68,6 +68,7 @@ class AddToCartButton extends StatelessWidget {
               BlocProvider.of<ProductCubitCubit>(
                 context,
               ).removeFromCart(productModel);
+
               showMassage(
                 context,
                 '${productModel.name} has been removed from your cart.',
@@ -105,6 +106,7 @@ class AddToCartButton extends StatelessWidget {
   }
 
   void showMassage(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         backgroundColor: AppColors.gray,
