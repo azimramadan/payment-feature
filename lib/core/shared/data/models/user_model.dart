@@ -17,7 +17,7 @@ class UserModel {
 }
 
 UserModel userModel = UserModel(
-  stripeCustomerId: 'ephkey_1RejN3IpK535XZH4D3W47jSi',
+  stripeCustomerId: 'cus_SYfBzyycl6Aa1t',
   phone: '01206263723',
   name: 'Abdelazim Ramadan',
   email: 'eng.abdelazim3@gmail.com',

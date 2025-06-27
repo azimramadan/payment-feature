@@ -78,6 +78,7 @@ class AddToCartButton extends StatelessWidget {
               showMassage(
                 context,
                 'You can only add up to 9 items to the cart.',
+                color: AppColors.red,
               );
             } else {
               BlocProvider.of<ProductCubitCubit>(
@@ -105,11 +106,11 @@ class AddToCartButton extends StatelessWidget {
     );
   }
 
-  void showMassage(BuildContext context, String message) {
+  void showMassage(BuildContext context, String message, {Color? color}) {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: AppColors.gray,
+        backgroundColor: color ?? AppColors.gray,
         content: Text(
           message,
           style: AppTextStyles.interRegular20(

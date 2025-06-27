@@ -45,10 +45,17 @@ class ActionButton extends StatelessWidget {
       builder: (context, state) {
         return ElevatedButton(
           onPressed: () {
-            if (paymentIntentInputModel.amount == 0) {
+            if (BlocProvider.of<ProductCubitCubit>(
+              context,
+            ).cartItemList.isEmpty) {
               showSnackBar(
                 context,
                 'Your cart is empty. Please add items before checking out.',
+              );
+            } else if (paymentIntentInputModel.amount == 0) {
+              showSnackBar(
+                context,
+                'The total amount is zero. Please add a quantity of any item in the cart before completing the purchase.',
               );
             } else {
               if (paymentMethod == PaymentMethod.card.toString()) {
