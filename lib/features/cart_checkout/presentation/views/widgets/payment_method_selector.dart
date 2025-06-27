@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:payment_feature/core/constants/styles/app_text_styles.dart';
 
-enum PaymentMethod { stripe, paypal }
+enum PaymentMethod { card, paypal }
 
 class PaymentMethodSelector extends StatefulWidget {
   final PaymentMethod selectedMethod;
@@ -31,11 +31,8 @@ class _PaymentMethodSelectorState extends State<PaymentMethodSelector> {
               splashFactory: NoSplash.splashFactory,
             ),
             child: RadioListTile<PaymentMethod>(
-              title: Text(
-                'Stripe',
-                style: AppTextStyles.interMedium22(context),
-              ),
-              value: PaymentMethod.stripe,
+              title: Text('Card', style: AppTextStyles.interMedium22(context)),
+              value: PaymentMethod.card,
               groupValue: widget.selectedMethod,
               onChanged: widget.onChanged,
             ),

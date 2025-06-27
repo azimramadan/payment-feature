@@ -4,6 +4,11 @@ import 'package:payment_feature/core/constants/app_assets.dart';
 import 'package:payment_feature/features/cart_checkout/data/models/cart_item_model.dart';
 import 'package:payment_feature/features/cart_checkout/data/models/order_summary_model.dart';
 import 'package:payment_feature/features/cart_checkout/data/models/product_model.dart';
+import 'package:payment_feature/features/cart_checkout/data/models/transaction/amount.dart';
+import 'package:payment_feature/features/cart_checkout/data/models/transaction/details.dart';
+import 'package:payment_feature/features/cart_checkout/data/models/transaction/item.dart';
+import 'package:payment_feature/features/cart_checkout/data/models/transaction/item_list.dart';
+import 'package:payment_feature/features/cart_checkout/data/models/transaction/transaction.dart';
 
 part 'product_cubit_state.dart';
 
@@ -82,18 +87,39 @@ class ProductCubitCubit extends Cubit<ProductCubitState> {
       imagePath: AppAssets.imagesProduct10,
     ),
   ];
-  List<CartItemModel> cardItemList = [];
-  OrderSummaryModel get summary => OrderSummaryModel(cartItems: cardItemList);
+  List<CartItemModel> cartItemList = [];
+  OrderSummaryModel get summary => OrderSummaryModel(cartItems: cartItemList);
+  Transactions get transactions => Transactions(
+    amount: Amount(
+      total: summary.total.toStringAsFixed(2),
+      currency: 'USD',
+      details: Details(
+        shipping: summary.shipping.toString(),
+        shippingDiscount: summary.discount.toInt(),
+        subtotal: summary.subtotal.toString(),
+      ),
+    ),
+    description: "Azim",
+    itemList: ItemList(
+      items: cartItemList.map((item) {
+        return Item(
+          currency: 'USD',
+          name: item.product.name,
+          price: item.product.price.toString(),
+          quantity: item.quantity,
+        );
+      }).toList(),
+    ),
+  );
   void addToCart(ProductModel product) {
-    if (cardItemList.any((item) => item.product.id == product.id)) {
-      // If the product is already in the cart, just update the quantity
-      cardItemList
+    if (cartItemList.any((item) => item.product.id == product.id)) {
+      cartItemList
           .firstWhere((item) => item.product.id == product.id)
           .quantity++;
       _updateState();
       return;
     }
-    if (cardItemList.length >= 9) {
+    if (cartItemList.length >= 9) {
       emit(
         ProductCubitError(
           message: 'You can only add up to 9 items to the cart.',
@@ -101,7 +127,7 @@ class ProductCubitCubit extends Cubit<ProductCubitState> {
       );
       return;
     }
-    cardItemList.add(
+    cartItemList.add(
       CartItemModel(
         product: product,
         quantity: product.availableQuantity > 0 ? 1 : 0,
@@ -112,16 +138,16 @@ class ProductCubitCubit extends Cubit<ProductCubitState> {
   }
 
   bool inTheBasket(ProductModel product) {
-    return cardItemList.any((item) => item.product.id == product.id);
+    return cartItemList.any((item) => item.product.id == product.id);
   }
 
   void removeFromCart(ProductModel product) {
-    cardItemList.removeWhere((item) => item.product.id == product.id);
+    cartItemList.removeWhere((item) => item.product.id == product.id);
     _updateState();
   }
 
   void updateQuantity(ProductModel product, int quantity) {
-    final cartItem = cardItemList.firstWhere(
+    final cartItem = cartItemList.firstWhere(
       (item) => item.product.id == product.id,
       orElse: () => CartItemModel(product: product, quantity: 0),
     );
@@ -139,6 +165,25 @@ class ProductCubitCubit extends Cubit<ProductCubitState> {
   }
 
   void _updateState() {
-    emit(ProductCubitUpdated(cartItems: List.from(cardItemList)));
+    emit(ProductCubitUpdated(cartItems: List.from(cartItemList)));
+  }
+
+  void updateAvailableQuantities() {
+    for (var cartItem in cartItemList) {
+      if (cartItem.quantity > 0) {
+        final index = productList.indexWhere(
+          (product) => product.id == cartItem.product.id,
+        );
+
+        if (index != -1) {
+          productList[index].availableQuantity -= cartItem.quantity;
+          cartItem.quantity = 0;
+          if (productList[index].availableQuantity < 0) {
+            productList[index].availableQuantity = 0;
+          }
+        }
+      }
+    }
+    _updateState();
   }
 }

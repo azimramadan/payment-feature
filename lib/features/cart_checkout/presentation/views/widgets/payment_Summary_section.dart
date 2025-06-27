@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:payment_feature/core/constants/styles/app_text_styles.dart';
+import 'package:payment_feature/core/shared/data/models/user_model.dart';
 import 'package:payment_feature/features/cart_checkout/data/models/order_summary_item.dart';
 import 'package:payment_feature/features/cart_checkout/data/models/order_summary_model.dart';
+import 'package:payment_feature/features/cart_checkout/data/models/payment_intent_input_model.dart';
 import 'package:payment_feature/features/cart_checkout/presentation/views/widgets/action_button.dart';
 import 'package:payment_feature/features/cart_checkout/presentation/views/widgets/payment_method_selector.dart';
 
@@ -14,7 +16,7 @@ class PaymentSummarySection extends StatefulWidget {
 }
 
 class _PaymentSummarySectionState extends State<PaymentSummarySection> {
-  PaymentMethod selectedMethod = PaymentMethod.stripe;
+  PaymentMethod selectedMethod = PaymentMethod.card;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -59,7 +61,13 @@ class _PaymentSummarySectionState extends State<PaymentSummarySection> {
           },
         ),
         const SizedBox(height: 4),
-        ActionButton(),
+        ActionButton(
+          paymentIntentInputModel: PaymentIntentInputModel(
+            amount: widget.orderSummaryModel.total,
+            customer: userModel.stripeCustomerId!,
+          ),
+          paymentMethod: selectedMethod.toString(),
+        ),
         const SizedBox(height: 12),
       ],
     );

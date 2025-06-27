@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_feature/features/cart_checkout/data/models/cart_item_model.dart';
-import 'package:payment_feature/features/cart_checkout/presentation/view_models/cubit/product_cubit_cubit.dart';
+import 'package:payment_feature/features/cart_checkout/presentation/view_models/product_cubit/product_cubit_cubit.dart';
 import 'package:payment_feature/features/cart_checkout/presentation/views/widgets/basket_item.dart';
 import 'package:payment_feature/features/cart_checkout/presentation/views/widgets/basket_widget.dart';
 import 'package:payment_feature/features/cart_checkout/presentation/views/widgets/product_tooltip.dart';
@@ -79,6 +79,12 @@ class _BasketWithItemsState extends State<BasketWithItems> {
   void dispose() {
     _removeOverlay();
     super.dispose();
+  }
+
+  @override
+  void deactivate() {
+    _removeOverlay();
+    super.deactivate();
   }
 
   void _removeOverlay() {

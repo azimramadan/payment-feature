@@ -7,7 +7,11 @@ final class CheckoutInitial extends CheckoutState {}
 
 class CheckoutLoading extends CheckoutState {}
 
-class CheckoutSuccess extends CheckoutState {}
+class CheckoutSuccess extends CheckoutState {
+  final TransactionSummaryModel transactionSummaryModel;
+
+  CheckoutSuccess({required this.transactionSummaryModel});
+}
 
 class CheckoutFailure extends CheckoutState {
   final String message;

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_feature/core/constants/styles/app_colors.dart';
 import 'package:payment_feature/core/constants/styles/app_text_styles.dart';
 import 'package:payment_feature/features/cart_checkout/data/models/product_model.dart';
-import 'package:payment_feature/features/cart_checkout/presentation/view_models/cubit/product_cubit_cubit.dart';
+import 'package:payment_feature/features/cart_checkout/presentation/view_models/product_cubit/product_cubit_cubit.dart';
 import 'package:payment_feature/features/cart_checkout/presentation/views/widgets/product_details_content.dart';
 
 class ProductDetails extends StatelessWidget {
@@ -45,7 +45,7 @@ class AddToCartButton extends StatelessWidget {
     ).inTheBasket(productModel);
     int cartCount = BlocProvider.of<ProductCubitCubit>(
       context,
-    ).cardItemList.length;
+    ).cartItemList.length;
     return BlocConsumer<ProductCubitCubit, ProductCubitState>(
       listener: (context, state) {
         if (state is ProductCubitError) {
@@ -88,9 +88,16 @@ class AddToCartButton extends StatelessWidget {
               );
             }
           },
-          child: Text(
-            isInCart ? 'Remove from Cart' : 'Add to Cart',
-            style: AppTextStyles.interRegular20(context),
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              isInCart ? 'Remove from Cart' : 'Add to Cart',
+              style: isInCart
+                  ? AppTextStyles.interRegular20(
+                      context,
+                    ).copyWith(color: AppColors.red)
+                  : AppTextStyles.interRegular20(context),
+            ),
           ),
         );
       },

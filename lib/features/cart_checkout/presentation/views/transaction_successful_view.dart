@@ -3,10 +3,12 @@ import 'package:payment_feature/core/constants/app_assets.dart';
 import 'package:payment_feature/core/constants/styles/app_colors.dart';
 import 'package:payment_feature/core/constants/styles/app_text_styles.dart';
 import 'package:payment_feature/features/cart_checkout/data/models/order_summary_item.dart';
+import 'package:payment_feature/features/cart_checkout/data/models/transaction_summary_model.dart';
+import 'package:payment_feature/features/cart_checkout/presentation/views/widgets/payment_method_selector.dart';
 
 class TransactionSuccessfulView extends StatelessWidget {
-  const TransactionSuccessfulView({super.key});
-
+  const TransactionSuccessfulView({super.key, required this.transactionInfo});
+  final TransactionSummaryModel transactionInfo;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,8 +17,7 @@ class TransactionSuccessfulView extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.close, color: AppColors.black),
-          onPressed: () =>
-              Navigator.of(context).popUntil((route) => route.isFirst),
+          onPressed: () => Navigator.of(context).pop(),
         ),
       ),
       body: Transform.translate(
@@ -49,28 +50,28 @@ class TransactionSuccessfulView extends StatelessWidget {
                 OrderInfoItem(
                   orderSummaryItem: OrderSummaryItem(
                     label: 'Date',
-                    value: '01/24/2023',
+                    value: transactionInfo.date,
                   ),
                 ),
                 const SizedBox(height: 20),
                 OrderInfoItem(
                   orderSummaryItem: OrderSummaryItem(
                     label: 'Time',
-                    value: '10:15 AM',
+                    value: transactionInfo.time,
                   ),
                 ),
                 const SizedBox(height: 20),
                 OrderInfoItem(
                   orderSummaryItem: OrderSummaryItem(
                     label: 'To',
-                    value: 'Sam Louis',
+                    value: transactionInfo.recipientName,
                   ),
                 ),
                 Divider(height: 54, thickness: 1.5, indent: 15, endIndent: 15),
                 OrderInfoItem(
                   orderSummaryItem: OrderSummaryItem(
                     label: 'Total',
-                    value: '\$50.97',
+                    value: '\$${transactionInfo.totalAmount}',
                   ),
                 ),
                 const SizedBox(height: 30),
@@ -89,11 +90,16 @@ class TransactionSuccessfulView extends StatelessWidget {
                       children: [
                         FittedBox(
                           fit: BoxFit.scaleDown,
-                          child: Image.asset(AppAssets.imagesPaypal),
+                          child: Image.asset(
+                            transactionInfo.paymentMethodImage,
+                          ),
                         ),
                         const SizedBox(width: 12),
                         Text(
-                          'Completed by PayPal',
+                          transactionInfo.paymentMethod ==
+                                  PaymentMethod.paypal.toString()
+                              ? 'Completed by PayPal'
+                              : 'Completed by Card',
                           style: AppTextStyles.interMedium22(
                             context,
                           ).copyWith(color: AppColors.blackWith50Opacity),

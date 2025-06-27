@@ -34,9 +34,11 @@ class ProductDetailsContent extends StatelessWidget {
           'Avilable: ${productModel.availableQuantity}',
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
-          style: AppTextStyles.interRegular18(
-            context,
-          ).copyWith(color: Colors.white70),
+          style: AppTextStyles.interRegular18(context).copyWith(
+            color: productModel.availableQuantity == 0
+                ? Colors.red
+                : Colors.white70,
+          ),
         ),
       ],
     );

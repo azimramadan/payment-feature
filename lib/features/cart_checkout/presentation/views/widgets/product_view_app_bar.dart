@@ -16,9 +16,10 @@ class ProductViewAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.transparent,
       title: Text(title, style: AppTextStyles.interMedium25(context)),
       elevation: 0,
+      surfaceTintColor: Colors.transparent,
       actions: [
         Padding(
           padding: EdgeInsets.only(right: screenWidth * 0.02),
