@@ -40,7 +40,7 @@ The project demonstrates clean architecture using **Cubit (BLoC)** for state man
   <img src="screenshots/screenshot_1.jpg" width="45%" />
   <img src="screenshots/screenshot_2.jpg" width="45%" />
 </p>
-<hr style="border: 0.5px solid #ccc;" />
+
 <p align="center">
   <img src="screenshots/screenshot_3.jpg" width="45%" />
   <img src="screenshots/screenshot_4.jpg" width="45%" />
